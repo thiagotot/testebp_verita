@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import br.com.verita.backend.dto.CustomerDto;
@@ -23,10 +22,10 @@ public class CustomerBusiness {
 	public String save(CustomerDto dto) {
 		try {
 			
-			boolean bCpf = customerValidation.valida(dto.getCpf());
+			String sValidCpf = customerValidation.valida(dto.getCpf());
 			
-			if (bCpf==false)
-				return "CPF INVÁLIDO!";
+			if (sValidCpf!="")
+				return sValidCpf;
 			
 			Customer msgObj = new Customer();
 			msgObj.setId(dto.getId());

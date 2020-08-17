@@ -1,5 +1,8 @@
 package br.com.verita.backend.validation;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface ICustomerValidation {
-	public boolean valida(String cpf) ;
+	public String valida(String cpf) ;
 }

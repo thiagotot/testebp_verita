@@ -4,13 +4,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.verita.backend.dto.CustomerDto;
 import br.com.verita.backend.model.Customer;
 import br.com.verita.backend.repository.CustomerRepository;
 import br.com.verita.backend.validation.ICustomerValidation;
 
+@RestController
+@CrossOrigin
 @Service
 public class CustomerBusiness {
 
@@ -19,10 +24,14 @@ public class CustomerBusiness {
 	@Autowired
 	private ICustomerValidation customerValidation;
 
+	public String validCpf (String cpf) {
+		return customerValidation.valida(cpf);
+	}
+	
 	public String save(CustomerDto dto) {
 		try {
 			
-			String sValidCpf = customerValidation.valida(dto.getCpf());
+			String sValidCpf = validCpf(dto.getCpf());
 			
 			if (sValidCpf!="")
 				return sValidCpf;

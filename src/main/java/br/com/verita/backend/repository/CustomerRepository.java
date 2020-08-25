@@ -1,9 +1,11 @@
 
 package br.com.verita.backend.repository;
 
-import br.com.verita.backend.model.*;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CustomerRepository extends MongoRepository<Customer, String> {
+import br.com.verita.backend.model.*;
+
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 }
 

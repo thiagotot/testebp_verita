@@ -1,8 +1,6 @@
-
 package br.com.verita.backend.api;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,22 +9,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.verita.backend.business.CustomerBusiness;
-import br.com.verita.backend.dto.CustomerDto;
+import br.com.verita.backend.business.PetBusiness;
+import br.com.verita.backend.dto.PetDto;
 import br.com.verita.backend.model.Customer;
+import br.com.verita.backend.model.Pet;
+import br.com.verita.backend.repository.PetRepository;
 
 @RestController
-@RequestMapping("/customerapi")
-public class CustomerApi {
+@RequestMapping("/petapi")
+public class PetApi {
 
 	@Autowired
-	private CustomerBusiness buCustomer;
+	private PetBusiness buPet;
+	
+	
 
-	@RequestMapping(value = "/post", method = { RequestMethod.POST })
-	public String save(@RequestBody CustomerDto customer) throws Exception {
+	@RequestMapping(value = "/save", method = { RequestMethod.POST })
+	public String save(@RequestBody PetDto message) throws Exception {
 
 		String retorno = "";
 		try {
-			retorno = buCustomer.save(customer);
+			retorno = buPet.save(message);
+
 		} catch (Exception e) {
 			retorno = e.getMessage();
 		}
@@ -35,19 +39,18 @@ public class CustomerApi {
 	}
 
 	@RequestMapping(value = "/get", method = { RequestMethod.GET })
-	public List<CustomerDto> findAll() {
-		return buCustomer.findAll();
+	public List<PetDto> findAll() {
+		return buPet.findAll();
 	}
 
 	@RequestMapping(value = "/count", method = { RequestMethod.GET })
 	public long count() {
-		return buCustomer.count();
-	}
-	
-	@RequestMapping(value = "/count", method = { RequestMethod.DELETE })
-	public String delete(Long id) {
-		return buCustomer.delete(id);
+		return buPet.count();
 	}
 
-	
+	@RequestMapping(value = "/count", method = { RequestMethod.DELETE })
+	public String delete(Long id) {
+		return buPet.delete(id);
+	}
+
 }

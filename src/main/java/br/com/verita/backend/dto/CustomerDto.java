@@ -12,7 +12,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @NoArgsConstructor
 @ApiIgnore
 @Data
-@ApiModel(description="Dto - Mensagem unívoca do sistema veritá")
+@ApiModel(description="Dto - Informações de Pet")
 public class CustomerDto {
 
 

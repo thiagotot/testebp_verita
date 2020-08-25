@@ -10,21 +10,20 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-
 @Data
 @Entity
-@Table(name = "customer")
-public class Customer implements Serializable{/**
-	 * 
-	 */
+@Table(name = "pet")
+public class Pet implements Serializable {
+	/**
+	* 
+	*/
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String nome;
-	private String cpf;
-	private String endereco;
+	private String nomepet;
+	private int idcustomer;
 
 	public long getId() {
 		return id;
@@ -34,30 +33,22 @@ public class Customer implements Serializable{/**
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomepet() {
+		return nomepet;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomepet(String nomepet) {
+		this.nomepet = nomepet;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public int getIdCustomer() {
+		return idcustomer;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setIdCustomer(int idCustomer) {
+		this.idcustomer = idCustomer;
 	}
 
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
 	
-
 
 }

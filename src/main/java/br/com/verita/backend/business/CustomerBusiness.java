@@ -1,5 +1,6 @@
 package br.com.verita.backend.business;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,18 +25,18 @@ public class CustomerBusiness {
 	@Autowired
 	private ICustomerValidation customerValidation;
 
-	public String validCpf (String cpf) {
+	public String validCpf(String cpf) {
 		return customerValidation.valida(cpf);
 	}
-	
+
 	public String save(CustomerDto dto) {
 		try {
-			
+
 			String sValidCpf = validCpf(dto.getCpf());
-			
-			if (sValidCpf!="")
+
+			if (sValidCpf != "")
 				return sValidCpf;
-			
+
 			Customer msgObj = new Customer();
 			msgObj.setId(dto.getId());
 			msgObj.setCpf(dto.getCpf());
@@ -50,20 +51,39 @@ public class CustomerBusiness {
 
 	}
 
-	public List<Customer> findAll() {
-		return repositoryCustomer.findAll();
+	public List<CustomerDto> findAll() {
+
+		List<Customer> lCustomer;
+		List<CustomerDto> lCustomerDto = new ArrayList<CustomerDto>();
+		CustomerDto dto;
+
+		lCustomer = repositoryCustomer.findAll();
+
+		for (Customer item : lCustomer) {
+			dto = new CustomerDto();
+			dto.setCpf(item.getCpf());
+			dto.setEndereco(item.getEndereco());
+			dto.setNome(item.getNome());
+			dto.setId(item.getId());
+			
+			lCustomerDto.add(dto);
+		}
+
+		return lCustomerDto;
+	}
+	
+	public boolean findByIdCount(int i) {
+		Optional<Customer> obj = repositoryCustomer.findById((long) i);
+		return obj.isEmpty();
 	}
 
 	public long count() {
 		return repositoryCustomer.count();
 	}
 
-	public Optional<Customer> findById(String id) {
-		return repositoryCustomer.findById(id);
-	}
-
-	public void delete(String id) {
+	public String delete(Long id) {
 		repositoryCustomer.deleteById(id);
+		return "Ok";
 	}
 
 }

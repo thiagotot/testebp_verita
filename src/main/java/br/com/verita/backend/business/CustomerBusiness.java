@@ -65,16 +65,19 @@ public class CustomerBusiness {
 			dto.setEndereco(item.getEndereco());
 			dto.setNome(item.getNome());
 			dto.setId(item.getId());
-			
+
 			lCustomerDto.add(dto);
 		}
 
 		return lCustomerDto;
 	}
-	
+
 	public boolean findByIdCount(int i) {
-		Optional<Customer> obj = repositoryCustomer.findById((long) i);
-		return obj.isEmpty();
+		Object obj = repositoryCustomer.findById((long) i);
+		if (obj.equals(null))
+			return true;
+		else
+			return false;
 	}
 
 	public long count() {
